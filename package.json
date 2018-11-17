@@ -1,7 +1,7 @@
 {
-  "name": "crawler",
+  "name": "scrapper",
   "version": "0.0.1",
-  "description": "✂️ Web scrapper to automate a simple task",
+  "description": "🐜 Web scrapper to automate simple personal tasks",
   "main": "src/index.ts",
   "scripts": {
     "dev": "ts-node-dev ./src/index.ts",
