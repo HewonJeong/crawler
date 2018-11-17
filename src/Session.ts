@@ -1,11 +1,11 @@
 import { stringify } from 'querystring'
 import axios from 'axios'
+import api, { host } from './constants/api'
 
 export default class Session {
   private readonly username: string
   private readonly password: string
   private session?: string
-  private static readonly HOST = 'http://rgo4.com'
 
   constructor(username: string, password: string) {
     this.username = username
@@ -29,7 +29,7 @@ export default class Session {
 
   private async prepare() {
     if (!this.session) {
-      const res = await axios.get(Session.HOST)
+      const res = await axios.get(host)
       const session: string = res.headers['set-cookie']
         .find((cookie: string) => cookie.startsWith('PHPSESSID'))
         .replace(' path=/', '')
@@ -40,10 +40,10 @@ export default class Session {
 
   private async signin() {
     const requestBody = this.getLoginData()
-    await axios(Session.HOST, {
+    await axios(host, {
       method: 'post',
       data: stringify(requestBody),
-      headers: { Cookie: this.session, Referer: 'http://rgo4.com/index' },
+      headers: { Cookie: this.session, Referer: api('home') },
     })
     return this
   }
@@ -51,10 +51,9 @@ export default class Session {
   private getLoginData = () => ({
     password: this.password,
     user_id: this.username,
-    success_return_url: Session.HOST,
+    success_return_url: host,
     act: 'procMemberLogin',
     ruleset: '@login',
     error_return_url: '/',
-    mid: 'index',
   })
 }

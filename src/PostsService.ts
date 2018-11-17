@@ -2,22 +2,21 @@ import Session from './Session'
 import cheerio from 'cheerio'
 import axios from 'axios'
 import Post, { PostFactory } from './Post'
+import api from './constants/api'
 
 export default class PostsService {
   private static session?: string
-  private static readonly HOST = 'http://rgo4.com'
-  private static readonly BOARD_URL = `${PostsService.HOST}/best`
+  private static readonly boardUrl = api('board')
 
   static async init() {
     PostsService.session = await new Session(
       process.env.USERNAME || '',
       process.env.PASSWORD || ''
     ).create()
-    console.log(PostsService.session)
   }
 
   static getPosts = async () => {
-    const { data: html } = await axios.get<string>(PostsService.BOARD_URL)
+    const { data: html } = await axios.get<string>(PostsService.boardUrl)
     const $ = cheerio.load(html, { decodeEntities: false })
     const trs = $('.list_normal tbody tr:not(.normal_notice)')
     const posts: Post[] = trs.toArray().map(tr => {
