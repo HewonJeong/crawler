@@ -1,7 +1,7 @@
 import dotenv from 'dotenv'
 import PostsService from './PostsService'
 import Post, { PricePost } from './Post'
-dotenv.config({ path: '.env.local' })
+dotenv.config({ path: '.env' })
 
 async function main() {
   const isTarget = (p: Post) => p instanceof PricePost
