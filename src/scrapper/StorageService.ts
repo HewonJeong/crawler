@@ -2,8 +2,8 @@ import { Config, S3 } from 'aws-sdk'
 import { Bucket } from 'aws-sdk/clients/cloudsearchdomain'
 
 export default class StorageService {
-  static store(key: string, data: string) {
-    S3Client.put(key, data)
+  static async store(key: string, data: string) {
+    return await S3Client.put(key, data)
   }
 }
 
@@ -33,12 +33,7 @@ class S3Client {
       Body: data,
       ACL: 'public-read',
     }
-    try {
-      await S3Client.client.putObject(params).promise()
-      return S3Client.getKey(fileName)
-    } catch (error) {
-      console.error(error)
-      return error
-    }
+    await S3Client.client.putObject(params).promise()
+    return S3Client.getKey(fileName)
   }
 }

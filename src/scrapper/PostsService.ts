@@ -2,7 +2,7 @@ import Session from './Session'
 import cheerio from 'cheerio'
 import axios from 'axios'
 import Post, { PostFactory } from './Post'
-import api from './constants/api'
+import api from '../constants/api'
 
 export default class PostsService {
   private static session?: string

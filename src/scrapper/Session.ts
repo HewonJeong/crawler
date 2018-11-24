@@ -1,6 +1,6 @@
 import { stringify } from 'querystring'
 import axios from 'axios'
-import api, { host } from './constants/api'
+import api, { host } from '../constants/api'
 
 export default class Session {
   private readonly username: string
