@@ -32,9 +32,11 @@
     "typescript": "^3.1.6"
   },
   "dependencies": {
+    "aws-sdk": "^2.361.0",
     "axios": "^0.18.0",
     "cheerio": "^1.0.0-rc.2",
     "dotenv": "^6.1.0",
+    "moment": "^2.22.2",
     "puppeteer": "^1.10.0"
   },
   "jest": {
@@ -45,7 +47,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && npm run test"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
