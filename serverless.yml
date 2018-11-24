@@ -1,0 +1,25 @@
+service: scapper
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-dotenv-plugin
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: ap-northeast-2
+
+functions:
+  scrap:
+    handler: src/handler.scrap
+    events:
+      - schedule: rate(1 hours)
+custom:
+  dotenv:
+    path: ./.env.local
+    include:
+      - USERNAME
+      - PASSWORD
+      - AWS_USER_KEY
+      - AWS_USER_SECRET
+      - AWS_REGION

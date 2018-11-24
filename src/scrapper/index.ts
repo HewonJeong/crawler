@@ -7,7 +7,7 @@ import StorageService from './StorageService'
 dotenv.config({ path: '.env' })
 moment.locale('ko')
 
-async function scrap() {
+export default async function scrap() {
   const isTarget = (p: Post) => p instanceof PricePost
   const posts = (await PostsService.getPosts()).filter(isTarget)
   const content = await PostsService.getContent(posts[0].link)
