@@ -26,12 +26,18 @@ class S3Client {
     const { AWS_REGION, BUCKET_NAME } = S3Client
     return `https://s3.${AWS_REGION}.amazonaws.com/${BUCKET_NAME}/${fileName}`
   }
+  static getContentType = (fileName: string) => {
+    if (fileName.endsWith('.html')) {
+      return 'text/html'
+    }
+  }
   static async put(fileName: string, data: string) {
     const params: S3.PutObjectRequest = {
       Bucket: S3Client.BUCKET_NAME,
       Key: fileName,
       Body: data,
       ACL: 'public-read',
+      ContentType: S3Client.getContentType(fileName),
     }
     await S3Client.client.putObject(params).promise()
     return S3Client.getKey(fileName)
