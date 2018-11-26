@@ -37,7 +37,7 @@ export default class PostsService {
       method: 'get',
       headers: { Cookie: PostsService.session },
     })
-    const $ = cheerio.load(html, { decodeEntities: false })
+    const $ = cheerio.load(html)
     const article = $('.article_body .xe_content')
     return article.html() || ''
   }
