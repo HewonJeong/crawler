@@ -13,7 +13,7 @@ functions:
   scrap:
     handler: src/handler.scrap
     events:
-      - schedule: rate(1 hours)
+      - schedule: rate(1 hour)
 custom:
   dotenv:
     path: ./.env.local
@@ -22,4 +22,6 @@ custom:
       - PASSWORD
       - AWS_USER_KEY
       - AWS_USER_SECRET
-      - AWS_REGION
+package:
+  exclude:
+    - node_modules/**
