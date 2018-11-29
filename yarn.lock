@@ -4604,6 +4604,10 @@ serverless-dotenv-plugin@^2.0.1:
     dotenv "^4.0.0"
     dotenv-expand "^4.0.1"
 
+serverless-plugin-existing-s3@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/serverless-plugin-existing-s3/-/serverless-plugin-existing-s3-2.2.2.tgz#612c66b9a77a615fd444c9cf4f1521833a9f805c"
+
 serverless-plugin-typescript@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/serverless-plugin-typescript/-/serverless-plugin-typescript-1.1.5.tgz#a62ed1f04ea76875c72700b36b8bf95002a8d6a0"

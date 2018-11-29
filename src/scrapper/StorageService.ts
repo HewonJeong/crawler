@@ -5,6 +5,9 @@ export default class StorageService {
   static async store(key: string, data: string) {
     return await S3Client.put(key, data)
   }
+  static async copy(source: string, dest: string) {
+    return await S3Client.copy(source, dest)
+  }
 }
 
 class S3Client {
@@ -41,5 +44,15 @@ class S3Client {
     }
     await S3Client.client.putObject(params).promise()
     return S3Client.getKey(fileName)
+  }
+  static async copy(source: string, dest: string) {
+    const { BUCKET_NAME, client } = S3Client
+    const params: S3.CopyObjectRequest = {
+      Bucket: BUCKET_NAME,
+      CopySource: `/${BUCKET_NAME}/${source}`,
+      ACL: 'public-read',
+      Key: dest,
+    }
+    return await client.copyObject(params).promise()
   }
 }

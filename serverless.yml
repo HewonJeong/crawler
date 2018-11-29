@@ -3,6 +3,8 @@ service: scapper
 plugins:
   - serverless-plugin-typescript
   - serverless-dotenv-plugin
+  - serverless-plugin-existing-s3
+
 provider:
   name: aws
   runtime: nodejs8.10
@@ -14,6 +16,13 @@ functions:
     handler: src/handler.scrap
     events:
       - schedule: rate(1 hour)
+  updateLatests:
+    handler: src/handler.updateLatest
+    events:
+      - existingS3:
+          bucket: scrapper-images
+          events:
+            - s3:ObjectCreated:*
 custom:
   dotenv:
     path: ./.env.local
@@ -22,6 +31,12 @@ custom:
       - PASSWORD
       - AWS_USER_KEY
       - AWS_USER_SECRET
-package:
-  exclude:
-    - node_modules/**
+
+iamRoleStatements:
+  - Effect: 'Allow'
+    Action:
+      - 's3:PutBucketNotification'
+    Resource:
+      Fn::Join:
+        - ''
+        - - 'arn:aws:s3:::BUCKET_NAME or *'

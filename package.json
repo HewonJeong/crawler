@@ -2,9 +2,9 @@
   "name": "scrapper",
   "version": "0.0.1",
   "description": "🐜 Web scrapper to automate simple personal tasks",
-  "main": "src/handler.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "dev": "ts-node-dev ./src/handelr.ts",
+    "dev": "ts-node-dev ./src/index.ts",
     "build": "tsc",
     "serve": "node build/index.js",
     "start": "npm run serve",
@@ -39,7 +39,8 @@
     "cheerio": "^1.0.0-rc.2",
     "dotenv": "^6.1.0",
     "moment": "^2.22.2",
-    "serverless": "^1.33.2"
+    "serverless": "^1.33.2",
+    "serverless-plugin-existing-s3": "^2.2.2"
   },
   "jest": {
     "preset": "ts-jest",
