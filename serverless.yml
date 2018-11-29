@@ -15,7 +15,7 @@ functions:
   scrap:
     handler: src/handler.scrap
     events:
-      - schedule: rate(1 hour)
+      - schedule: cron(0 1-5 * * * *)
   updateLatests:
     handler: src/handler.updateLatest
     events:
