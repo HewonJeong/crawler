@@ -5,12 +5,24 @@ export const writeFile = (fileName: string, content: any) => {
   stream.once('open', () => stream.end(content))
 }
 
-export const buildHtml = (body: string) => {
+export const buildHtml = (title: string, body: string) => {
   return `
     <!DOCTYPE html>
-      <html>
-        <head></head>
-        <body>${body}</body>
+      <html lang="en">
+        <head>
+          <title>${title}</title>
+          <meta charset="utf-8" />
+          <link rel="shortcut icon" href="/scrapper-images/favicon.ico" />
+          <link rel="apple-touch-icon" href="/scrapper-images/phone.png">
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+        </head>
+        <body>
+          <style>img { max-width: 100%; max-height: 100%; }</style>
+          ${body}
+        </body>
       </html>
   `
 }

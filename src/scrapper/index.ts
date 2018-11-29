@@ -1,10 +1,9 @@
-import dotenv from 'dotenv'
 import PostsService from './PostsService'
 import Post, { PricePost } from './Post'
 import moment from 'moment'
 import StorageService from './StorageService'
+import { buildHtml } from '../utils/files'
 
-dotenv.config({ path: '.env' })
 moment.locale('ko')
 
 export default async function scrap() {
@@ -13,6 +12,6 @@ export default async function scrap() {
   const content = await PostsService.getContent(posts[0].link)
   const date = moment().format('YYYY-MM-DD')
   const output = `${date}.html`
-  const key = await StorageService.store(output, content)
+  const key = await StorageService.store(output, buildHtml(date, content))
   return key
 }
