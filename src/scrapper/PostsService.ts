@@ -3,6 +3,9 @@ import cheerio from 'cheerio'
 import axios from 'axios'
 import Post, { PostFactory } from './Post'
 import api from '../constants/api'
+import moment = require('moment')
+
+const toDate = (date: string) => moment(date, 'YY.MM.DD').format('YYYY-MM-DD')
 
 export default class PostsService {
   private static session?: string
@@ -25,8 +28,9 @@ export default class PostsService {
       const link = dom.find('.title a').attr('href')
       const hits = parseInt(dom.find('.read_num.num').text(), 10)
       const likes = parseInt(dom.find('.vote_num.num').text(), 10)
+      const date = toDate(dom.find('.time.num').text())
 
-      return PostFactory.createPost(title, link, hits, likes)
+      return PostFactory.createPost(title, link, hits, likes, date)
     })
     return posts
   }

@@ -8,14 +8,15 @@ export class PostFactory {
     title: string,
     link: string,
     hits: number,
-    likes: number
+    likes: number,
+    date: string
   ): Post => {
     const type = title.includes('시세표') ? Type.Price : Type.Normal
     switch (type) {
       case Type.Price:
-        return new PricePost(title, link, hits, likes)
+        return new PricePost(title, link, hits, likes, date)
       case Type.Normal:
-        return new NormalPost(title, link, hits, likes)
+        return new NormalPost(title, link, hits, likes, date)
       default:
         throw new Error('invalid type')
     }
@@ -23,13 +24,15 @@ export class PostFactory {
 }
 
 abstract class Post {
-  title: string
-  link: string
-  hits: number
-  likes: number
   content?: string
 
-  constructor(title: string, link: string, hits: number, likes: number) {
+  constructor(
+    readonly title: string,
+    readonly link: string,
+    readonly hits: number,
+    readonly likes: number,
+    readonly date: string
+  ) {
     this.title = title
     this.link = link
     this.hits = hits
@@ -42,15 +45,27 @@ export class PricePost extends Post {
   type: Type.Price
   imgSrc?: string
 
-  constructor(title: string, link: string, hits: number, likes: number) {
-    super(title, link, hits, likes)
+  constructor(
+    title: string,
+    link: string,
+    hits: number,
+    likes: number,
+    date: string
+  ) {
+    super(title, link, hits, likes, date)
     this.type = Type.Price
   }
 }
 export class NormalPost extends Post {
   type: Type.Normal
-  constructor(title: string, link: string, hits: number, likes: number) {
-    super(title, link, hits, likes)
+  constructor(
+    title: string,
+    link: string,
+    hits: number,
+    likes: number,
+    date: string
+  ) {
+    super(title, link, hits, likes, date)
     this.type = Type.Normal
   }
 }
