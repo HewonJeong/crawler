@@ -12,6 +12,7 @@ export const buildHtml = (title: string, body: string) => {
         <head>
           <title>${title}</title>
           <meta charset="utf-8" />
+          <link rel="stylesheet" href="/scrapper-images/main.css">
           <link rel="shortcut icon" href="/scrapper-images/favicon.ico" />
           <link rel="apple-touch-icon" href="/scrapper-images/phone.png">
           <meta
@@ -20,7 +21,6 @@ export const buildHtml = (title: string, body: string) => {
           />
         </head>
         <body>
-          <style>img { max-width: 100%; max-height: 100%; }</style>
           ${body}
         </body>
       </html>
