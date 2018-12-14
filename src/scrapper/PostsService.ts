@@ -5,7 +5,10 @@ import Post, { PostFactory } from './Post'
 import api from '../constants/api'
 import moment = require('moment')
 
-const toDate = (date: string) => moment(date, 'YY.MM.DD').format('YYYY-MM-DD')
+const toDate = (str: string) => {
+  const date = str.includes(':') ? moment() : moment(str, 'YY.MM.DD')
+  return date.format('YYYY-MM-DD')
+}
 
 export default class PostsService {
   private static session?: string
@@ -42,7 +45,7 @@ export default class PostsService {
       headers: { Cookie: PostsService.session },
     })
     const $ = cheerio.load(html)
-    const article = $('.article_body .xe_content')
+    const article = $('.has_list')
     return article.html() || ''
   }
 }
